@@ -1,0 +1,863 @@
+<python>
+init_vpython()
+
+SIM_START = r"""# -- sim.py -- #
+from vpython import *
+
+# --- Make Sim UI -- #
+scene = canvas(resizable=False)
+scene.title = '<b>Simulation</b>'
+scene.caption = '<b>\nControls\n</b>'
+
+def play_pause(evt):
+    if evt.text == 'Play':
+        play_pause_button.text = 'Pause'
+    else:
+        play_pause_button.text = 'Play'
+play_pause_button = button(bind=play_pause, text='Pause')
+
+scene.append_to_caption('\n\n<b>Console</b>')
+print_options(delete=True)
+print_options(place=scene.caption_anchor, height=200)
+print('>> python sim.py')
+
+scene.center = vector(0, 0, 0)
+scene.range = 6
+scene.background = vector(0.9258, 0.9258, 0.9258)
+
+# --- Draw Box --- #
+box_size = 5
+v = box_size / 2
+r = 0.05
+c = color.black
+box_bottom = curve(color=c, radius=r)
+box_bottom.append([vector(-v,-v,-v), vector(-v,-v,v), vector(v,-v,v), vector(v,-v,-v), vector(-v,-v,-v)])
+box_top = curve(color=c, radius=r)
+box_top.append([vector(-v,v,-v), vector(-v,v,v), vector(v,v,v), vector(v,v,-v), vector(-v,v,-v)])
+vert1 = curve(color=c, radius=r)
+vert2 = curve(color=c, radius=r)
+vert3 = curve(color=c, radius=r)
+vert4 = curve(color=c, radius=r)
+vert1.append([vector(-v,-v,-v), vector(-v,v,-v)])
+vert2.append([vector(-v,-v,v), vector(-v,v,v)])
+vert3.append([vector(v,-v,v), vector(v,v,v)])
+vert4.append([vector(v,-v,-v), vector(v,v,-v)])
+"""
+</python>
+
+<catsoop-section>What is VPython?</catsoop-section>
+<a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/index.html">VPython</a> is a Python library that makes it easy to code 3D simulations. In this exercise, we will learn the basics of VPython with the end goal of making the following simulation.
+
+<div id="glowscript-sample" class="glowscript">
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// START JAVASCRIPT
+;(function() {;
+var ρσ_modules = {};
+ρσ_modules.pythonize = {};
+
+(function(){
+    function strings() {
+        var string_funcs, exclude, name;
+        string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+        if (!arguments.length) {
+            exclude = (function(){
+                var s = ρσ_set();
+                s.jsset.add("split");
+                s.jsset.add("replace");
+                return s;
+            })();
+        } else if (arguments[0]) {
+            exclude = Array.prototype.slice.call(arguments);
+        } else {
+            exclude = null;
+        }
+        if (exclude) {
+            string_funcs = string_funcs.difference(set(exclude));
+        }
+        var ρσ_Iter0 = string_funcs;
+        ρσ_Iter0 = ((typeof ρσ_Iter0[Symbol.iterator] === "function") ? (ρσ_Iter0 instanceof Map ? ρσ_Iter0.keys() : ρσ_Iter0) : Object.keys(ρσ_Iter0));
+        for (var ρσ_Index0 of ρσ_Iter0) {
+            name = ρσ_Index0;
+            (ρσ_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name] = (ρσ_expr_temp = ρσ_str.prototype)[(typeof name === "number" && name < 0) ? ρσ_expr_temp.length + name : name];
+        }
+    };
+    if (!strings.__module__) Object.defineProperties(strings, {
+        __module__ : {value: "pythonize"}
+    });
+
+    ρσ_modules.pythonize.strings = strings;
+})();
+async function __main__() {
+"use strict";
+    var display = canvas;
+    var scene = canvas();
+
+    function round(num, n=0) {return Number(num.toFixed(n))}
+
+    var version, print, arange, __name__, type, ρσ_ls, scene, box_size, v, r, c, box_bottom, box_top, vert1, vert2, vert3, vert4, marble, other_marbles, all_marbles, dt, ρσ_unpack, m1, m2, j, i;
+    version = ρσ_list_decorate([ "3.2", "glowscript" ]);
+    Array.prototype['+'] = function(r) {return this.concat(r)}
+    Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+    window.__GSlang = "vpython";
+    print = GSprint;
+    arange = range;
+    __name__ = "__main__";
+    type = pytype;
+    var strings = ρσ_modules.pythonize.strings;
+
+    strings();
+    "4";
+    scene = ρσ_interpolate_kwargs.call(this, canvas, [ρσ_desugar_kwargs({resizable: false})]);
+    "5";
+    scene.range = 6;
+    "6";
+    scene.background = vector(.9258, .9258, .9258);
+    "9";
+    box_size = 5;
+    "10";
+    v = box_size["/"](2);
+    "11";
+    r = .05;
+    "12";
+    c = color.black;
+    "13";
+    box_bottom = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: c, radius: r})]);
+    "14";
+    box_bottom.append(ρσ_list_decorate([ vector(1["-u"]()["*"](v), 1["-u"]()["*"](v), 1["-u"]()["*"](v)), vector(1["-u"]()["*"](v), 1["-u"]()["*"](v), v), vector(v, 1["-u"]()["*"](v), v), vector(v, 1["-u"]()["*"](v), 1["-u"]()["*"](v)), vector(1["-u"]()["*"](v), 1["-u"]()["*"](v), 1["-u"]()["*"](v)) ]));
+    "15";
+    box_top = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: c, radius: r})]);
+    "16";
+    box_top.append(ρσ_list_decorate([ vector(1["-u"]()["*"](v), v, 1["-u"]()["*"](v)), vector(1["-u"]()["*"](v), v, v), vector(v, v, v), vector(v, v, 1["-u"]()["*"](v)), vector(1["-u"]()["*"](v), v, 1["-u"]()["*"](v)) ]));
+    "17";
+    vert1 = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: c, radius: r})]);
+    "18";
+    vert2 = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: c, radius: r})]);
+    "19";
+    vert3 = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: c, radius: r})]);
+    "20";
+    vert4 = ρσ_interpolate_kwargs.call(this, curve, [ρσ_desugar_kwargs({color: c, radius: r})]);
+    "21";
+    vert1.append(ρσ_list_decorate([ vector(1["-u"]()["*"](v), 1["-u"]()["*"](v), 1["-u"]()["*"](v)), vector(1["-u"]()["*"](v), v, 1["-u"]()["*"](v)) ]));
+    "22";
+    vert2.append(ρσ_list_decorate([ vector(1["-u"]()["*"](v), 1["-u"]()["*"](v), v), vector(1["-u"]()["*"](v), v, v) ]));
+    "23";
+    vert3.append(ρσ_list_decorate([ vector(v, 1["-u"]()["*"](v), v), vector(v, v, v) ]));
+    "24";
+    vert4.append(ρσ_list_decorate([ vector(v, 1["-u"]()["*"](v), 1["-u"]()["*"](v)), vector(v, v, 1["-u"]()["*"](v)) ]));
+    "28";
+    async function add_marble() {
+        var ρσ_ls, marble;
+        "29";
+        marble = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: vector(1["-u"]()["*"](2), 1["-u"]()["*"](1), 0), radius: .5, color: color.blue, make_trail: true, retain: 200})]);
+        "30";
+        marble.vel = vector(.67, 2.21, 1["-u"]()["*"](3.2));
+        "31";
+        return marble;
+    };
+    if (!add_marble.__module__) Object.defineProperties(add_marble, {
+        __module__ : {value: null}
+    });
+
+    "37";
+    async function move_marble(marble, dt) {
+        "38";
+        marble.pos=marble.pos["+"](marble.vel["*"](dt));
+        "39";
+        return marble;
+    };
+    if (!move_marble.__argnames__) Object.defineProperties(move_marble, {
+        __argnames__ : {value: ["marble", "dt"]},
+        __module__ : {value: null}
+    });
+
+    "45";
+    async function check_wall_collision(marble, box_size) {
+        "46";
+        if (abs(marble.pos.x)["+"](marble.radius)[">="](box_size["/"](2))) {
+            "47";
+            marble.vel.x=marble.vel.x["*"](1["-u"]()["*"](1));
+            "48";
+        }
+        if (abs(marble.pos.y)["+"](marble.radius)[">="](box_size["/"](2))) {
+            "49";
+            marble.vel.y=marble.vel.y["*"](1["-u"]()["*"](1));
+            "50";
+        }
+        if (abs(marble.pos.z)["+"](marble.radius)[">="](box_size["/"](2))) {
+            "51";
+            marble.vel.z=marble.vel.z["*"](1["-u"]()["*"](1));
+        }
+        "52";
+        return marble;
+    };
+    if (!check_wall_collision.__argnames__) Object.defineProperties(check_wall_collision, {
+        __argnames__ : {value: ["marble", "box_size"]},
+        __module__ : {value: null}
+    });
+
+    "58";
+    async function add_other_marbles() {
+        var box_size = ( 0 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true) ? undefined : arguments[0];
+        var n = (arguments[1] === undefined || ( 1 === arguments.length["-"](1) && arguments[arguments.length["-"](1)] !== null && typeof arguments[arguments.length["-"](1)] === "object" && arguments[arguments.length["-"](1)] [ρσ_kwargs_symbol] === true)) ? add_other_marbles.__defaults__.n : arguments[1];
+        var ρσ_kwargs_obj = arguments[arguments.length["-"](1)];
+        if (ρσ_kwargs_obj === null || typeof ρσ_kwargs_obj !== "object" || ρσ_kwargs_obj [ρσ_kwargs_symbol] !== true) ρσ_kwargs_obj = {};
+        if (Object.prototype.hasOwnProperty.call(ρσ_kwargs_obj, "n")){
+            n = ρσ_kwargs_obj.n;
+        }
+        var ρσ_ls, other_marbles, r, bounds, found_pos, pos, collision, o_m, s, i;
+        "59";
+        other_marbles = ρσ_list_decorate([]);
+        "60";
+        for (var ρσ_Index1 = 0; ρσ_Index1["<"](n); ρσ_Index1++) {
+            i = ρσ_Index1;
+            "61";
+            r = .5;
+            "62";
+            bounds = box_size["/"](2)["-"](1["*"](r));
+            "63";
+            found_pos = false;
+            "64";
+            while (!found_pos) {
+                "65";
+                pos = vector.random()["*"](bounds);
+                "66";
+                collision = false;
+                "67";
+                var ρσ_Iter2 = other_marbles;
+                ρσ_Iter2 = ((typeof ρσ_Iter2[Symbol.iterator] === "function") ? (ρσ_Iter2 instanceof Map ? ρσ_Iter2.keys() : ρσ_Iter2) : Object.keys(ρσ_Iter2));
+                for (var ρσ_Index2 of ρσ_Iter2) {
+                    o_m = ρσ_Index2;
+                    "68";
+                    if (mag(pos["-"](1["*"](o_m.pos)))["<"](r["+"](o_m.radius))) {
+                        "69";
+                        collision = true;
+                        "70";
+                    }
+                }
+                if (!collision) {
+                    "71";
+                    found_pos = true;
+                }
+            }
+            "73";
+            s = ρσ_interpolate_kwargs.call(this, sphere, [ρσ_desugar_kwargs({pos: pos, radius: r})]);
+            "74";
+            s.vel = 2["*"](vector.random());
+            "75";
+            other_marbles.append(s);
+        }
+        "76";
+        return other_marbles;
+    };
+    if (!add_other_marbles.__defaults__) Object.defineProperties(add_other_marbles, {
+        __defaults__ : {value: {n:4}},
+        __handles_kwarg_interpolation__ : {value: true},
+        __argnames__ : {value: ["box_size", "n"]},
+        __module__ : {value: null}
+    });
+
+    "82";
+    async function check_marble_collision(m1, m2) {
+        var ρσ_ls, n, vel1_n, vel2_n;
+        "83";
+        if (mag(m1.pos["-"](1["*"](m2.pos)))["<"](m1.radius["+"](m2.radius))) {
+            "84";
+            n = norm(m1.pos["-"](1["*"](m2.pos)));
+            "86";
+            vel1_n = dot(m1.vel, n);
+            "87";
+            vel2_n = dot(m2.vel, n);
+            "89";
+            m1.vel = m1.vel["-"](1["*"](n)["*"](vel1_n["-"](1["*"](vel2_n))));
+            "90";
+            m2.vel = m2.vel["-"](1["*"](n)["*"](vel2_n["-"](1["*"](vel1_n))));
+        }
+        "91";
+        return ρσ_list_decorate([ m1, m2 ]);
+    };
+    if (!check_marble_collision.__argnames__) Object.defineProperties(check_marble_collision, {
+        __argnames__ : {value: ["m1", "m2"]},
+        __module__ : {value: null}
+    });
+
+    "94";
+    marble = (await add_marble());
+    "95";
+    other_marbles = (await add_other_marbles(box_size));
+    "97";
+    all_marbles = ρσ_list_decorate([ marble ])["+"](other_marbles);
+    "98";
+    dt = .01;
+    "100";
+    while (true) {
+        "101";
+        (await rate(200));
+        "102";
+        var ρσ_Iter3 = all_marbles;
+        ρσ_Iter3 = ((typeof ρσ_Iter3[Symbol.iterator] === "function") ? (ρσ_Iter3 instanceof Map ? ρσ_Iter3.keys() : ρσ_Iter3) : Object.keys(ρσ_Iter3));
+        for (var ρσ_Index3 of ρσ_Iter3) {
+            marble = ρσ_Index3;
+            "103";
+            (await move_marble(marble, dt));
+            "104";
+            (await check_wall_collision(marble, box_size));
+        }
+        "105";
+        var ρσ_Iter4 = range(len(all_marbles));
+        ρσ_Iter4 = ((typeof ρσ_Iter4[Symbol.iterator] === "function") ? (ρσ_Iter4 instanceof Map ? ρσ_Iter4.keys() : ρσ_Iter4) : Object.keys(ρσ_Iter4));
+        for (var ρσ_Index4 of ρσ_Iter4) {
+            i = ρσ_Index4;
+            "106";
+            var ρσ_Iter5 = range(i["+"](1), len(all_marbles));
+            ρσ_Iter5 = ((typeof ρσ_Iter5[Symbol.iterator] === "function") ? (ρσ_Iter5 instanceof Map ? ρσ_Iter5.keys() : ρσ_Iter5) : Object.keys(ρσ_Iter5));
+            for (var ρσ_Index5 of ρσ_Iter5) {
+                j = ρσ_Index5;
+                "107";
+                ρσ_unpack = [ρσ_getitem(all_marbles, i), ρσ_getitem(all_marbles, j)];
+                m1 = ρσ_unpack[0];
+                m2 = ρσ_unpack[1];
+                "108";
+                (await check_marble_collision(m1, m2));
+            }
+        }
+    }
+};
+if (!__main__.__module__) Object.defineProperties(__main__, {
+    __module__ : {value: null}
+});
+
+;$(function(){ window.__context = { glowscript_container: $("#glowscript-sample").removeAttr("id") }; __main__() })})()
+// END JAVASCRIPT
+
+//--><!]]></script>
+</div>
+
+<catsoop-section>Making Objects</catsoop-section>
+You can make any of the <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/objects.html">basic 3D objects</a> in VPython with a simple function call. For example, the following code adds a box to the scene.
+
+```py
+from vpython import *
+
+box()
+```
+
+<center style="margin-top: 16px">
+<img style="border: 2px solid black" src="CURRENT/image_1.png" width="500">
+</center>
+
+<a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/vector.html">Vectors</a> are used by the graphical objects to represent various 3D properties. For example, every object has a `pos` parameter that sets its position. Every object also has a `color` parameter that sets its <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/color.html">color</a>.
+
+Every object type has its own set of parameters that it uses to set certain attributes upon creation. For example, a <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/box.html">`box`</a> can be created with a `length`, `height`, and `width`, while a <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/sphere.html">`sphere`</a> can be created with a `radius`.
+
+The following code adds a cyan colored box with dimensions `<2, 4, 6>` that is centered at `<1, 2, 3>` to the scene.
+
+```py
+from vpython import *
+
+box()
+box(pos=vector(1, 2, 3), length=2, height=4, width=6, color=color.cyan)
+```
+
+<center style="margin-top: 16px">
+<img style="border: 2px solid black" src="CURRENT/image_2.png" width="500">
+</center>
+
+You can get the value of an attribute by using `.` notation. You can set custom attributes by using the same `.` notation. The following code uses the attributes of one box to create a new box.
+
+```py
+from vpython import *
+
+my_box = box(pos=vector(1, 2, 3), size=vector(2, 2, 2), color=color.cyan)
+my_box.special_scaling_factor = 3.1415
+
+your_box = box(pos=my_box.pos * -2, size=my_box.size * my_box.special_scaling_factor, color=color.yellow)
+```
+
+<center style="margin-top: 16px">
+<img style="border: 2px solid black" src="CURRENT/image_3.png" width="500">
+</center>
+
+<catsoop-section>Making the Simulation</catsoop-section>
+
+The following code draws a cube using the <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/curve.html">`curve`</a> object. In the following sections, you will add on to this code to make the target simulation. Assume that the VPython library is imported in all of the coding questions (using `from vpython import *`).
+
+```py
+from vpython import *
+
+box_size = 5
+v = box_size / 2
+r = 0.05
+c = color.black
+box_bottom = curve(color=c, radius=r)
+box_bottom.append([vector(-v,-v,-v), vector(-v,-v,v), vector(v,-v,v), vector(v,-v,-v), vector(-v,-v,-v)])
+box_top = curve(color=c, radius=r)
+box_top.append([vector(-v,v,-v), vector(-v,v,v), vector(v,v,v), vector(v,v,-v), vector(-v,v,-v)])
+vert1 = curve(color=c, radius=r)
+vert2 = curve(color=c, radius=r)
+vert3 = curve(color=c, radius=r)
+vert4 = curve(color=c, radius=r)
+vert1.append([vector(-v,-v,-v), vector(-v,v,-v)])
+vert2.append([vector(-v,-v,v), vector(-v,v,v)])
+vert3.append([vector(v,-v,v), vector(v,v,v)])
+vert4.append([vector(v,-v,-v), vector(v,v,-v)])
+```
+
+<catsoop-subsection>Adding a Marble</catsoop-subsection>
+We'll start by adding a marble with some initial velocity inside of our cube.
+
+Click `Run Simulation` to see the simulation that your code produces.
+Click `Submit` to verify that your code is correct.
+
+<question vpython>
+csq_name = "VPYTHON_STEP_1"
+
+csq_prompt = """Complete the function `add_marble` which adds a `sphere` with a radius of `0.5` anywhere inside the cube and returns it.
+Set a custom `vel` attribute to any non-zero `vector` to represent its initial velocity.
+"""
+
+csq_initial = """
+def add_marble():
+    marble = sphere(pos=vector(-2, -1, 2), radius=0.5, color=color.blue, make_trail=True, retain=100)
+    marble.vel = vector(1, 2, 3)
+    return marble
+"""
+
+csq_soln = csq_initial
+
+def check_pos(sub, sol):
+    try:
+        sub = sub["result"]
+        sol = sol["result"]
+        return (-5 + 0.5 <= sub[0] <= 5 - 0.5) and (-5 + 0.5 <= sub[1] <= 5 - 0.5) and (-5 + 0.5 <= sub[2] <= 5 - 0.5)
+    except:
+        return False
+
+def check_vel(sub, sol):
+    try:
+        sub = sub["result"]
+        sol = sol["result"]
+        return (sub[0] != None) and (sub[1] != None) and (sub[2] != None)
+    except:
+        return False
+
+csq_tests = [
+    {'code': 'marble=add_marble()\nans=(marble.pos.x, marble.pos.y, marble.pos.z, marble.radius)', 'check_function': check_pos, 'description': 'Check position'},
+    {'code': 'marble=add_marble()\nans=marble.radius', 'description': 'Check radius'},
+    {'code': 'marble=add_marble()\nans=(marble.vel.x, marble.vel.y, marble.vel.z)', 'check_function': check_vel, 'description': 'Check velocity'}
+]
+
+csq_vpython_pre = """
+%s
+# --- Your Code --- #""" % SIM_START
+
+csq_vpython_post = """# --- Simulation Logic --- #
+marble = add_marble()
+
+while True:
+    rate(200)
+"""
+</question>
+
+Let's take a second to talk about the output that you see when you click `Run Simulation`:
+1. First, you'll see the actual simulation itself. You can interact with the scene using your mouse and keyboard.
+    - Use shift+drag to pan the camera
+    - Use control+drag to rotate the camera
+    - Use option/alt+drag or scroll wheel to zoom
+2. Next, you'll see some user input widgets, such as buttons, which can be used to interact with the simulation. Our simulation currently isn't moving so the Play/Pause button doesn't do anything yet.
+3. After that, you'll see the console, which shows you the output of any `print` statements in your code.
+4. Lastly, you'll see the code that was used to create the simulation. The "Make Sim UI" section is what makes the user interface for the simulation and everything below that is what actually draws and animates the simulation.
+
+Now, let's look at our simulation logic.
+
+```py
+marble = add_marble()
+
+while True:
+    rate(200)
+```
+
+Our simulation will use a while loop to continuously update our scene. The `rate(200)` controls the <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/rate.htmlrate">rate</a> at which our scene is redrawn. It's a requirement for VPython to run the simulation correctly. Since we're not doing anything in our while loop, our scene stays the same.
+
+<catsoop-subsection>Moving the Marble</catsoop-subsection>
+
+Now that we have our marble in the scene, let's animate it!
+
+<question vpython>
+csq_name = "VPYTHON_STEP_2"
+
+csq_prompt = """Complete the function `move_marble` which updates the position of the `marble` according to its velocity over the given change in time `dt`.
+The function should return the `marble`.
+"""
+
+csq_initial = """
+def move_marble(marble, dt):
+    marble.pos += marble.vel * dt
+    return marble
+"""
+
+csq_soln = csq_initial
+
+def check_fn(sub, sol):
+    try:
+        sub = sub["result"]
+        sol = sol["result"]
+        return sub[0] == sol[0] and sub[1] == sol[1] and sub[2] == sol[2]
+    except:
+        return False
+
+csq_code_pre = """
+import vpython
+vpython.baseObj._view_constructed = True
+from vpython import *
+def add_marble():
+    marble = sphere(pos=vector(-2, -1, 2), radius=0.5)
+    marble.vel = vector(1, 2, 3)
+    return marble
+"""
+
+csq_tests = [
+    {'code': 'marble=add_marble()\nmarble=move_marble(marble, 0.1)\nans=(marble.vel.x, marble.vel.y, marble.vel.z)', 'check_function': check_fn}
+]
+
+csq_vpython_pre = """
+%s
+
+# --- Part 1 --- #
+VPYTHON_STEP_1
+# --- Your Code --- #""" % SIM_START
+
+csq_vpython_post = """# --- Simulation Logic --- #
+marble = add_marble()
+dt = 0.01
+
+while True:
+    rate(200)
+    if play_pause_button.text == 'Pause':
+        move_marble(marble, dt)
+"""
+</question>
+
+Look at the new simulation code:
+1. There is a new variable `dt` which represents the change in simulation time after one iteration of the while loop.
+2. If the button is in "Play" mode, the marble moves according to the function you defined.
+
+<catsoop-subsection>Colliding with the Walls</catsoop-subsection>
+
+To prevent our marble from launching into the void, let's make it bounce off of the cube's walls. When the marble is out of bounds, its velocity should flip signs in the direction that it was out of bounds in.
+
+<question vpython>
+csq_name = "VPYTHON_STEP_3"
+
+csq_prompt = """Complete the function `check_wall_collision` which checks if a marble is out of bounds and updates the velocity of the marble accordingly. Remember that the box is centered around 0. Return the `marble`.
+"""
+
+csq_initial = """
+def check_wall_collision(marble, box_size):
+    if abs(marble.pos.x) + marble.radius >= box_size / 2:
+        marble.vel.x *= -1
+    if abs(marble.pos.y) + marble.radius >= box_size / 2:
+        marble.vel.y *= -1
+    if abs(marble.pos.z) + marble.radius >= box_size / 2:
+        marble.vel.z *= -1
+    return marble
+"""
+
+csq_soln = csq_initial
+
+def check_fn(sub, sol):
+    try:
+        sub = sub["result"]
+        sol = sol["result"]
+        return sub[0] == sol[0] and sub[1] == sol[1] and sub[2] == sol[2]
+    except:
+        return False
+
+csq_code_pre = """
+import vpython
+vpython.baseObj._view_constructed = True
+from vpython import *
+box_size = 5
+def add_marble():
+    marble = sphere(pos=vector(-6, -6, -6), radius=0.5, color=color.red)
+    marble.vel = vector(1, 2, 3)
+    return marble
+"""
+
+csq_tests = [
+    {'code': 'marble=add_marble()\nmarble=check_wall_collision(marble, box_size)\nans=(marble.vel.x, marble.vel.y, marble.vel.z)', 'check_function': check_fn}
+]
+
+csq_vpython_pre = r"""
+%s
+
+# --- Section 1 --- #
+VPYTHON_STEP_1
+# --- Section 2 --- #
+VPYTHON_STEP_2
+# --- This Section --- #""" % SIM_START
+
+csq_vpython_post = """# --- Sim Logic --- #
+marble = add_marble()
+dt = 0.01
+
+while True:
+    rate(200)
+    if play_pause_button.text == 'Pause':
+        move_marble(marble, dt)
+        check_wall_collision(marble, box_size)
+"""
+</question>
+
+<catsoop-subsection>Adding More Marbles</catsoop-subsection>
+
+Now let's add more marbles to see them all bounce around in the cube! In the following question, feel free to use the <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/vector.html?highlight=random#random-vector">`vector.random()`</a> function if you would like to add some randomness to your simulation.
+
+<question vpython>
+csq_name = "VPYTHON_STEP_4"
+
+csq_prompt = """Complete the function `add_other_marbles` which adds `n` marbles inside of the cube, each with some initial velocity."""
+
+csq_initial = """
+def add_other_marbles(box_size, n=4):
+    other_marbles = []
+    for i in range(n):
+        r = 0.5
+        bounds = box_size / 2 - r
+        found_pos = False
+        while not found_pos:
+            pos = bounds * vector.random()
+            collision = False
+            for o_m in other_marbles:
+                if mag(pos - o_m.pos) < r + o_m.radius:
+                    collision = True
+            if not collision:
+                found_pos = True
+
+        s = sphere(pos=pos, radius=r)
+        s.vel = 2 * vector.random()
+        other_marbles.append(s)
+    return other_marbles
+"""
+
+csq_soln = csq_initial
+
+def check_fn(sub, sol):
+    try:
+        sub = sub["result"]
+        sol = sol["result"]
+        for x, y, z, r in sub:
+            if not ((-5 + r <= x <= 5 - r) and (-5 + r <= y <= 5 - r) and (-5 + r <= z <= 5 - r) and r == 0.5):
+                return False
+        return True
+    except:
+        return False
+
+csq_code_pre = """
+from vpython import *
+import vpython
+vpython.baseObj._view_constructed = True
+box_size = 5
+"""
+
+csq_tests = [
+    {'code': 'other_marbles=add_other_marbles(box_size)\nans=[(marble.pos.x, marble.pos.y, marble.pos.z, marble.radius) for marble in other_marbles]', 'check_function': check_fn, 'description': 'Check marble positions and radius'}
+]
+
+csq_vpython_pre = r"""
+%s
+
+# --- Section 1 --- #
+VPYTHON_STEP_1
+# --- Section 2 --- #
+VPYTHON_STEP_2
+# --- Section 3 --- #
+VPYTHON_STEP_3
+# --- This Section --- #""" % SIM_START
+
+csq_vpython_post = """# --- Sim Logic --- #
+marble = add_marble()
+other_marbles = add_other_marbles(box_size)
+# Put all marbles into one list
+all_marbles = [marble] + other_marbles
+dt = 0.01
+
+while True:
+    rate(200)
+    if play_pause_button.text == 'Pause':
+        for marble in all_marbles:
+            move_marble(marble, dt)
+            check_wall_collision(marble, box_size)
+"""
+</question>
+
+Notice how we now have to iterate through our list of marbles at every iteration of our loop to update their position and check for wall collisions.
+
+<catsoop-subsection>Marble Collisions</catsoop-subsection>
+
+For our last trick, we will make the marbles collide with each other. Remember that for equal mass elastic collisions between spheres:
+
+\begin{equation}
+\vec{v}_1' = \vec{v}_1 - \left[ (\vec{v}_1 - \vec{v}_2) \cdot \hat{n} \right] \hat{n}
+\end{equation}
+
+$\vec{v}_2' = \vec{v}_2 - \left[ (\vec{v}_2 - \vec{v}_1) \cdot \hat{n} \right] \hat{n}$
+
+where $\hat{n} = \frac{\vec{r}_1 - \vec{r}_2}{\left\lVert \vec{r}_1 - \vec{r}_2 \right\rVert}$ is the unit vector pointing from particle 2 to particle 1 (direction of collision), $\vec{v}_1, \vec{v}_2$ are the velocities before the collision, and $\vec{v}_1', \vec{v}_2'$ are the velocities after the collision.
+
+You may find the <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/vector.html">`norm` and `dot`</a> functions useful in your calculations.
+
+<question vpython>
+csq_name = "VPYTHON_STEP_5"
+
+csq_prompt = """Complete the function `check_marble_collision` which checks if the given two marbles, `m1` and `m2`, are colliding and, if so, updates their velocities according to the equation above. The function should return the two marbles.
+"""
+
+csq_initial = """
+def check_marble_collision(m1, m2):
+    if mag(m1.pos - m2.pos) < m1.radius + m2.radius:
+        n = norm(m1.pos - m2.pos)
+
+        vel1_n = dot(m1.vel, n)
+        vel2_n = dot(m2.vel, n)
+
+        m1.vel = m1.vel - n*(vel1_n - vel2_n)
+        m2.vel = m2.vel - n*(vel2_n - vel1_n)
+    return [m1, m2]
+"""
+
+csq_soln = csq_initial
+
+def check_fn(sub, sol):
+    try:
+        sub = sub["result"]
+        sol = sol["result"]
+        return sub[0] == sol[0] and sub[1] == sol[1] and sub[2] == sol[2]
+    except:
+        return False
+
+csq_code_pre = """
+import vpython
+vpython.baseObj._view_constructed = True
+from vpython import *
+box_size = 5
+def add_marble(v):
+    marble = sphere(pos=vector(-2, -1, 2), radius=0.5)
+    marble.vel = v
+    return marble
+"""
+
+csq_tests = [
+    {'code': 'm1=add_marble(vector(1, -2, 3))\nm2=add_marble(vector(2, -5, 4))\nm1, m2=check_marble_collision(m1, m2)\nans=(m1.vel.x - m2.vel.x, m1.vel.y - m2.vel.y, m1.vel.z - m2.vel.z)', 'check_function': check_fn, 'description': 'Check marble collision'}
+]
+
+csq_vpython_pre = r"""
+%s
+
+# --- Section 1 --- #
+VPYTHON_STEP_1
+# --- Section 2 --- #
+VPYTHON_STEP_2
+# --- Section 3 --- #
+VPYTHON_STEP_3
+# --- Section 4 --- #
+VPYTHON_STEP_4
+# --- This Section --- #""" % SIM_START
+
+csq_vpython_post = """# --- Sim Logic --- #
+marble = add_marble()
+other_marbles = add_other_marbles(box_size)
+# Put all marbles into one list
+all_marbles = [marble] + other_marbles
+dt = 0.01
+
+while True:
+    rate(200)
+    if play_pause_button.text == 'Pause':
+        for marble in all_marbles:
+            move_marble(marble, dt)
+            check_wall_collision(marble, box_size)
+        for i in range(len(all_marbles)):
+            for j in range(i+1, len(all_marbles)):
+                m1, m2 = all_marbles[i], all_marbles[j]
+                check_marble_collision(m1, m2)
+"""
+</question>
+
+Notice that in every iteration of our loop, we're now checking each marble pair to see if they're colliding. And with that, we've completed our simulation!
+
+<catsoop-subsection>Graphing Data</catsoop-subsection>
+
+VPython supports <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/docs/VPythonDocs/graph.html">graphing data</a> dynamically in real time.
+In order to graph data, we must first create a `graph` object.
+We use this object to style our graphing region (set the title, label our axes, etc.).
+Then, we can create a `gcurve`, `gdots`, or `gvbars` object using that `graph` object to make the plot itself.
+
+In the following example, we use a `gcurve` object to plot the total momentum in the system over time.
+Since we are simulating perfectly elastic collisions, we should expect the total momentum to stay constant.
+Let's see how good our simulation actually is!
+
+<question vpython>
+csq_name = "VPYTHON_STEP_6"
+
+csq_prompt = """Run the following code to see plot it produces. Feel free to modify the code to plot other data.
+"""
+
+csq_initial = """
+g = graph(title='Total Momentum of the System', xtitle='Time (t)', ytitle='Momentum (kg * m/s)', ymin=0, ymax=100)
+plot = gcurve(graph=g)
+
+def update_plot(plot, all_marbles, t):
+    total_momentum = 0
+    for m in all_marbles:
+        total_momentum += 1 * mag(m.vel)
+    plot.plot(t, total_momentum)
+"""
+
+csq_soln = csq_initial
+
+csq_tests = [
+    {'code': 'ans=True', 'description': 'Ungraded'}
+]
+
+csq_vpython_pre = r"""
+%s
+
+# --- Section 1 --- #
+VPYTHON_STEP_1
+# --- Section 2 --- #
+VPYTHON_STEP_2
+# --- Section 3 --- #
+VPYTHON_STEP_3
+# --- Section 4 --- #
+VPYTHON_STEP_4
+# --- Section 5 --- #
+VPYTHON_STEP_5
+# --- This Section --- #
+scene.append_to_caption('\n<b>Graphs</b>')""" % SIM_START
+
+csq_vpython_post = """# --- Sim Logic --- #
+marble = add_marble()
+other_marbles = add_other_marbles(box_size)
+# Put all marbles into one list
+all_marbles = [marble] + other_marbles
+dt = 0.01
+t = 0
+
+while True:
+    rate(200)
+    if play_pause_button.text == 'Pause':
+        update_plot(plot, all_marbles, t)
+        for marble in all_marbles:
+            move_marble(marble, dt)
+            check_wall_collision(marble, box_size)
+        for i in range(len(all_marbles)):
+            for j in range(i+1, len(all_marbles)):
+                m1, m2 = all_marbles[i], all_marbles[j]
+                check_marble_collision(m1, m2)
+        t += dt
+"""
+</question>
+
+You can see that we added a `t` variable which tracks the total amount of simulation time that has passed.
+At every iteration of our loop, we update our plot using the `update_plot` function that we defined.

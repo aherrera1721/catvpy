@@ -1,0 +1,26 @@
+This page explains how the VPython question type works.
+
+<catsoop-section>`init_vpython`</catsoop-section>
+
+The `init_vpython` function defined in `preload.py` handles the following:
+1. CSS styling of the GlowScript simulation components & importing of the GlowScript scripts required to make and display the simulation
+2. Custom logic to ensure that only one GlowScript simulation is running at a time
+3. Bugs with conflicting versions of MathJax
+
+This function must be called in `content.catsoop` using a `<python>` element.
+
+<catsoop-section>`vpython.py`</catsoop-section>
+
+<catsoop-subsection>Defaults</catsoop-subsection>
+The `vpython` question type extends the built-in `pythoncode` question type.
+The question uses two new variables, `csq_vpython_pre` and `csq_vpython_post`, which are analogous to `csq_code_pre` and `csq_code_post`.
+The difference is that `csq_vpython_pre` and `csq_vpython_post` are used by `handle_check` to generate the GlowScript simulation response, 
+whereas `csq_code_pre` and `csq_code_post` are used by `handle_submit` to grade submissions.
+
+<catsoop-subsection>Code Injection</catsoop-subsection>
+This question type expects `csq_name` to have the format `X_Y` where `X` is any string and `Y` is an integer.
+This format enables a `vpython` question to get a user's submitted code for all questions with a matching `X` and smaller `Y` value.
+Those code submissions are then injected into the simulation code in `handle_check` wherever that submission's corresponding `csq_name` is found.
+
+<catsoop-subsection>GlowScript</catsoop-subsection>
+The `handle_check` function returns a JavaScript `<script>` element which compiles the submitted Python code into JavaScript and uses it to generate the GlowScript animation in the response.
