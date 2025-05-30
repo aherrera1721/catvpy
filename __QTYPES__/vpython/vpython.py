@@ -30,6 +30,11 @@ def get_previous_submissions(**info):
             previous_submissions[prev_name] = ""
     return previous_submissions
 
+def check_previous_submissions(previous_submissions):
+    for value in previous_submissions.values():
+        if not value:
+            return False
+    return True
 
 def inject_previous_submissions(code, previous_submissions):
     for key, value in previous_submissions.items():
@@ -44,7 +49,11 @@ def handle_check(submissions, **info):
         return code
 
     code = "\n\n".join([info["csq_vpython_pre"], code, info["csq_vpython_post"]])
-    code = inject_previous_submissions(code, get_previous_submissions(**info))
+    
+    prev_subs = get_previous_submissions(**info)
+    if not check_previous_submissions(prev_subs):
+        return "<font color='red'>You must submit your code for all of the previous parts.</font>"
+    code = inject_previous_submissions(code, prev_subs)
 
     prefix, _ = info["csq_name"].rsplit("_", 1)
 
