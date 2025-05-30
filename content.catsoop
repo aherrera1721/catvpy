@@ -1,5 +1,6 @@
-CatVPy is a <a target="_blank" rel="noopener noreferrer" href="https://vpython.org/">VPython<a/> question type for the <a target="_blank" rel="noopener noreferrer" href="https://catsoop.org/">CAT-SOOP</a> framework, powered by <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/">GlowScript</a>.
+CatVPy is a <a target="_blank" rel="noopener noreferrer" href="https://vpython.org/">VPython<a/> question type for the <a target="_blank" rel="noopener noreferrer" href="https://catsoop.org/">CAT-SOOP</a> learning management system, powered by <a target="_blank" rel="noopener noreferrer" href="https://www.glowscript.org/">GlowScript</a>.
 
 
 * <a href="COURSE/pages/demo">CatVPy Demo</a>
+* <a href="COURSE/pages/installation-guide">Installation Guide</a>
 * <a href="COURSE/pages/developers-guide">Developer's Guide</a>
